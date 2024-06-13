@@ -21,12 +21,12 @@ pipeline {
     }
     stage('Static Code Analysis') {
       environment {
-        sh 'ls -ltr'
-        sh 'pwd && whoami && ip r'
         SONAR_URL = "http://localhost:9000"
       }
       steps {
         withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
+          sh 'ls -ltr'
+          sh 'pwd && whoami && ip r'
           sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
         }
       }
