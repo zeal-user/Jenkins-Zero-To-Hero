@@ -21,6 +21,8 @@ pipeline {
     }
     stage('Static Code Analysis') {
       environment {
+        sh 'ls -ltr'
+        sh 'pwd && whoami && ip r'
         SONAR_URL = "http://localhost:9000"
       }
       steps {
